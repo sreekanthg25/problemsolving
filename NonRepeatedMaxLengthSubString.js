@@ -1,18 +1,33 @@
-let str = "ABCADAADSD";
+let str = "BADDAFGDGEDADE";
 let strMap = {};
 let count = 0;
 let maxCount = 0;
+let startIndex = 0;
+let chars = "";
 
 function getNonRepeatedMaxLengthSubString() {
   for (let i = 0; i < str.length; i++) {
-    if (strMap[str[i]] === undefined || i - count > strMap[str[i]]) {
+    const prevIndex = strMap[str[i]];
+    if (prevIndex === undefined || i - count > prevIndex) {
       count++;
+      chars = str.substr(startIndex, maxCount);
     } else {
-      count = i - strMap[str[i]];
+      const subStringCount = i - prevIndex;
+      if (subStringCount >= maxCount) {
+        startIndex = prevIndex + 1;
+      }
+      count = subStringCount;
     }
     strMap[str[i]] = i;
-    if (count > maxCount) maxCount = count;
+    if (count > maxCount) {
+      maxCount = count;
+    }
   }
-  return maxCount;
+  return { maxCnt: maxCount, NRChars: chars };
 }
-console.log(getNonRepeatedMaxLengthSubString(), "max");
+const { maxCnt, NRChars } = getNonRepeatedMaxLengthSubString();
+console.log(
+  "Max non repeated count is `%d`, and the string is %s",
+  maxCnt,
+  NRChars
+);
