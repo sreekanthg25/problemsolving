@@ -10,9 +10,8 @@
     if (prevIndex === undefined || i - count > prevIndex) {
       count++;
     } else {
-      const subStringCount = i - prevIndex;
       currIndex = prevIndex + 1;
-      count = subStringCount;
+      count = i - prevIndex;
     }
     strMap[str[i]] = i;
     if (count >= maxCount) {
