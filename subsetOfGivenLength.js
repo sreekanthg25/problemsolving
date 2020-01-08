@@ -1,24 +1,23 @@
 let finalSubsetArray = [];
 let length = 2;
 let data = [];
+let arr = [1, 2, 3, 4];
 
-function subsetOfGivenLength(arr, index, n) {
+function subsetOfGivenLength(index = 0, n = 0) {
   let subset = [];
   if (index === length) {
     for (let i = 0; i < length; i++) {
       subset.push(data[i]);
     }
     finalSubsetArray.push(subset);
+    console.log(subset.join(" "));
     return;
   }
+  if (n >= arr.length) return;
   data[index] = arr[n];
-  if (n >= arr.length) {
-    return;
-  }
-  subsetOfGivenLength(arr, index + 1, n + 1);
-  subsetOfGivenLength(arr, index, n + 1);
-
+  subsetOfGivenLength(index + 1, n + 1);
+  subsetOfGivenLength(index, n + 1);
   return finalSubsetArray;
 }
 
-subsetOfGivenLength([1, 2, 3], 0, 0);
+subsetOfGivenLength(0, 0);
