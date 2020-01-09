@@ -13,10 +13,17 @@ function subsetOfGivenLength(index = 0, n = 0) {
     console.log(subset.join(" "));
     return;
   }
-  if (n >= arr.length) return;
-  data[index] = arr[n];
-  subsetOfGivenLength(index + 1, n + 1);
-  subsetOfGivenLength(index, n + 1);
+  //1st solution
+  //if (n >= arr.length) return;
+  //data[index] = arr[n];
+  //subsetOfGivenLength(index + 1, n + 1);
+  //subsetOfGivenLength(index, n + 1);
+  
+  //2nd solution
+  for(; n < arr.length; n++){
+    data[index] = arr[n];
+    subsetOfGivenLength(index + 1, n + 1);
+  }
   return finalSubsetArray;
 }
 
