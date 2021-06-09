@@ -12,18 +12,18 @@ For example, given n = 3, a solution set is:
 
 function parnthesisCombi(n) {
   let paranthesisArr = [];
-  const genParanthesis = (prefix, left, right) => {
-    if(left > right) {
+  const genParanthesis = (prefix, open, close) => {
+    if (open > close) {
       return;
     }
-    if (!left && !right) {
+    if (!open && !close) {
       paranthesisArr = [...paranthesisArr, prefix];
     }
-    if (left > 0) {
-      genParanthesis(`${prefix}(`, left - 1, right);
+    if (open > 0) {
+      genParanthesis(`${prefix}(`, open - 1, close);
     }
-    if (right > 0) {
-      genParanthesis(`${prefix})`, left, right - 1);
+    if (close > 0) {
+      genParanthesis(`${prefix})`, open, close - 1);
     }
   };
   genParanthesis("", n, n);
