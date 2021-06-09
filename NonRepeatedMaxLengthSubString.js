@@ -1,23 +1,13 @@
- function getNonRepeatedMaxLengthSubString(str) {
-  let strMap = {};
-  let count = 0;
+function getNonRepeatedMaxLengthSubString(str) {
   let maxCount = 0;
-  let currIndex = 0;
   let startIndex = 0;
-  let chars = "";
+  let map = {};
   for (let i = 0; i < str.length; i++) {
-    const prevIndex = strMap[str[i]];
-    if (prevIndex === undefined || i - count > prevIndex) {
-      count++;
-    } else {
-      currIndex = prevIndex + 1;
-      count = i - prevIndex;
+    if (map[str[i]]) {
+      startIndex = Math.max(startIndex, map[str[i]] + 1);
     }
-    strMap[str[i]] = i;
-    if (count >= maxCount) {
-      maxCount = count;
-      startIndex = currIndex;
-    }
+    map[str[i]] = i;
+    maxCount = Math.max(maxCount, i - startIndex + 1);
   }
   return { maxCnt: maxCount, NRChars: str.substr(startIndex, maxCount) };
 }
